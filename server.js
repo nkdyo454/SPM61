@@ -12,5 +12,5 @@ app.get('/', (req, res) => {
   res.send('Hello Airbus');
 });
 
-app.listen(PORT, HOST);
+app.listen(PORT, HOST)
 console.log(`Running on http://${HOST}:${PORT}`);
