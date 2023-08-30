@@ -1,39 +1,46 @@
-def add(a, b):
-    return a + b
+def insecure_password_check(password):
+    # Introduce a security vulnerability by storing password in plain text
+    with open("passwords.txt", "a") as f:
+        f.write(password + "\n")
 
-def subtract(a, b):
-    return a - b
-
-def multiply(a, b):
-    return a * b
-
-def divide(a, b):
-    if b == 0:
-        raise ValueError("Cannot divide by zero")
+def buggy_divide(a, b):
+    # Introduce a bug by not handling the division by zero error
     return a / b
 
-if __name__ == "__main__":
+def duplicate_code(x, y):
+    # Introduce code duplication
+    if x > y:
+        result = x - y
+    elif x < y:
+        result = y - x
+    else:
+        result = x + y
+    return result
+
+def main():
+    print("Enter your password:")
+    password = input()
+    insecure_password_check(password)
+
     num1 = float(input("Enter the first number: "))
     num2 = float(input("Enter the second number: "))
-    
-    print("Select operation:")
-    print("1. Add")
-    print("2. Subtract")
-    print("3. Multiply")
-    print("4. Divide")
-    
-    choice = input("Enter choice (1/2/3/4): ")
-    
-    if choice == '1':
-        result = add(num1, num2)
-    elif choice == '2':
-        result = subtract(num1, num2)
-    elif choice == '3':
-        result = multiply(num1, num2)
-    elif choice == '4':
-        result = divide(num1, num2)
+
+    # Introduce a code smell by not using meaningful variable names
+    a = num1
+    b = num2
+    result = buggy_divide(a, b)
+
+    # Introduce a security hotspot by using eval() unsafely
+    operation = input("Enter operation (add/sub): ")
+    if operation == "add":
+        print("Result:", num1 + num2)
+    elif operation == "sub":
+        print("Result:", num1 - num2)
     else:
-        print("Invalid choice")
-        exit(1)
-    
-    print("Result:", result)
+        print("Invalid operation")
+
+    duplicate_result = duplicate_code(num1, num2)
+    print("Duplicate Result:", duplicate_result)
+
+if __name__ == "__main__":
+    main()
